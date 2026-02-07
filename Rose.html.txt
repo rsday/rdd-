@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rose Day 🌹</title>
+<style>
+body{
+  margin:0;
+  background:#fff0f5;
+  height:100vh;
+  overflow:hidden;
+  font-family:Arial;
+}
+.dog{
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:220px;
+}
+.rose{
+  position:absolute;
+  width:80px;
+}
+.msg{
+  position:absolute;
+  background:white;
+  padding:6px 10px;
+  border-radius:12px;
+  font-size:14px;
+  display:none;
+  box-shadow:0 2px 6px rgba(0,0,0,.2);
+}
+</style>
+</head>
+<body>
+
+<img class="dog" src="https://pngimg.com/uploads/dog/dog_PNG50348.png">
+
+<script>
+const roses=[
+ {t:"this is for you",x:40,y:80},
+ {t:"you are cute",x:220,y:120},
+ {t:"happy Rose Day",x:120,y:260},
+ {t:"blue label",x:300,y:220},
+ {t:"cheers",x:200,y:360}
+];
+
+roses.forEach(d=>{
+ const r=document.createElement("img");
+ r.src="https://pngimg.com/uploads/rose/rose_PNG66963.png";
+ r.className="rose";
+ r.style.left=d.x+"px";
+ r.style.top=d.y+"px";
+
+ const m=document.createElement("div");
+ m.className="msg";
+ m.innerText=d.t;
+
+ document.body.appendChild(r);
+ document.body.appendChild(m);
+
+ r.addEventListener("click",()=>{
+  m.style.display=m.style.display==="block"?"none":"block";
+  m.style.left=r.offsetLeft+"px";
+  m.style.top=(r.offsetTop-40)+"px";
+ });
+
+ let ox,oy;
+ r.addEventListener("touchstart",e=>{
+  ox=e.touches[0].clientX-r.offsetLeft;
+  oy=e.touches[0].clientY-r.offsetTop;
+ });
+
+ r.addEventListener("touchmove",e=>{
+  e.preventDefault();
+  r.style.left=(e.touches[0].clientX-ox)+"px";
+  r.style.top=(e.touches[0].clientY-oy)+"px";
+ });
+});
+</script>
+
+</body>
+</html>
